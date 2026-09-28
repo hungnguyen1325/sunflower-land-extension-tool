@@ -1,0 +1,81 @@
+{
+  "manifest_version": 3,
+  "name": "Sunflower Land Pro Automation v6.2",
+  "version": "6.1.0",
+  "description": "Hệ thống tự động hóa toàn diện 100% Game Bridge cho Sunflower Land (v6.2).",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://sunflower-land.com/*",
+    "https://www.sunflower-land.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sunflower-land.com/*",
+        "https://www.sunflower-land.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content.js",
+        "scripts/bridge/game-bridge.js",
+        "scripts/game_data.js",
+        "scripts/lock.js",
+        "scripts/captcha.js",
+        "scripts/auto_popup.js",
+        "scripts/load_data.js",
+        "scripts/checkin.js",
+        "scripts/tools_buy.js",
+        "scripts/seeds_buy.js",
+        "scripts/mushrooms.js",
+        "scripts/flowers.js",
+        "scripts/honey.js",
+        "scripts/wood.js",
+        "scripts/mining.js",
+        "scripts/fruit_tree.js",
+        "scripts/compost.js",
+        "scripts/cooking.js",
+        "scripts/deliveries.js",
+        "scripts/poppy_bounties.js",
+        "scripts/weekly_chores.js",
+        "scripts/season_milestones.js",
+        "scripts/treasure_chest.js",
+        "scripts/fishing.js",
+        "scripts/salt_mining.js",
+        "scripts/land_expansion.js",
+        "scripts/crops_harvest.js",
+        "scripts/fertilise.js",
+        "scripts/crops_plant.js",
+        "scripts/scheduler.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "scripts/bridge/page-bridge.js",
+        "data/data.json"
+      ],
+      "matches": [
+        "https://sunflower-land.com/*",
+        "https://www.sunflower-land.com/*"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Sunflower Land Pro v6",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  }
+}

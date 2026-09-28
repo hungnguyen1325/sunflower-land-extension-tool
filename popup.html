@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunflower Land UI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #140e09;
+      --bg-card: #22160d;
+      --bg-card-hover: #2e1e12;
+      --border-color: #3e2817;
+      --border-active: #c89542;
+      --text-primary: #f5efe6;
+      --text-secondary: #a39589;
+      --color-accent: #e5a93b;
+      --color-success: #4caf50;
+      --color-warning: #ff9800;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      width: 340px;
+      height: 560px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border-color);
+      padding: 14px;
+    }
+
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .app-header h1 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-accent);
+      letter-spacing: 0.5px;
+    }
+
+    .version-tag {
+      font-size: 11px;
+      background: var(--border-color);
+      color: var(--text-secondary);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+
+    /* main_app list wrapper with custom scrollbar */
+    .main_app {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Custom scrollbar */
+    .main_app::-webkit-scrollbar {
+      width: 4px;
+    }
+    .main_app::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .main_app::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 2px;
+    }
+
+    /* Menu item card styling */
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 12px 14px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .menu-item:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-1px);
+      border-color: #523722;
+    }
+
+    .menu-item.master-item {
+      background: linear-gradient(135deg, #2b1d0c 0%, #1e1307 100%);
+      border: 1px solid var(--color-accent);
+      box-shadow: 0 0 10px rgba(229, 169, 59, 0.15);
+    }
+    .menu-item.master-item .menu-item-title {
+      color: var(--color-accent);
+      font-weight: 700;
+    }
+
+    .menu-item-icon {
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: rgba(229, 169, 59, 0.1);
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .menu-item-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      flex: 1;
+    }
+
+    /* Switch styling */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 36px;
+      height: 18px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--border-color);
+      transition: .2s ease;
+      border-radius: 18px;
+      border: 1px solid #5a3c22;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 12px;
+      width: 12px;
+      left: 2px;
+      bottom: 2px;
+      background-color: var(--text-secondary);
+      transition: .2s ease;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(18px);
+      background-color: var(--bg-main);
+    }
+
+    /* Mine targets section styling */
+    .mine-section {
+      border-top: 1px solid var(--border-color);
+      margin-top: 8px;
+      padding-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .mine-target-bunch {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .mine-chip {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .mine-chip input {
+      display: none;
+    }
+
+    .mine-chip span {
+      display: inline-block;
+      padding: 5px 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .mine-chip:hover span {
+      background: var(--bg-card-hover);
+      border-color: #523722;
+    }
+
+    .mine-chip input:checked + span {
+      background: var(--color-accent);
+      color: var(--bg-main);
+      border-color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    /* Footer / Status Area */
+    .app-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border-color);
+      font-size: 11px;
+    }
+
+    .status-label {
+      color: var(--text-secondary);
+    }
+
+    .status-text {
+      flex: 1;
+      margin-left: 8px;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: rgba(163, 149, 137, 0.1);
+      color: var(--text-secondary);
+    }
+
+    .status-badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-secondary);
+    }
+
+    .status-badge.live {
+      background: rgba(76, 175, 80, 0.1);
+      color: var(--color-success);
+    }
+
+    .status-badge.live::before {
+      background: var(--color-success);
+      box-shadow: 0 0 6px var(--color-success);
+      animation: pulse 1.5s infinite;
+    }
+
+    .status-badge.warn {
+      background: rgba(255, 152, 0, 0.1);
+      color: var(--color-warning);
+    }
+
+    .status-badge.warn::before {
+      background: var(--color-warning);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.6; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.6; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="app-header">
+      <h1>Sunflower Land Auto</h1>
+      <span class="version-tag">v6.1.0</span>
+    </header>
+
+    <!-- This will be populated dynamically from JS -->
+    <main class="main_app"></main>
+
+    <footer class="app-status">
+      <span class="status-label">Trạng thái:</span>
+      <span id="statusText" class="status-text">Đang tải...</span>
+      <span id="statusBadge" class="status-badge">Đang tải</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
